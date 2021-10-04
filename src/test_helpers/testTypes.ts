@@ -202,7 +202,9 @@ const test_appsettings = new TestType<AppSettings>({
   discordRPC: true,
   egsLinkedPath: 'egs/linked/path',
   exitToTray: false,
+  enableEsync: false,
   enableFSR: false,
+  enableFsync: false,
   enableResizableBar: false,
   maxSharpness: 5,
   language: 'en',
@@ -217,6 +219,7 @@ const test_appsettings = new TestType<AppSettings>({
   showMangohud: false,
   startInTray: false,
   useGameMode: false,
+  wineCrossoverBottle: 'bottle',
   winePrefix: 'winePrefix',
   wineVersion: {
     bin: 'bin',

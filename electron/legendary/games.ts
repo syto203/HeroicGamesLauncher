@@ -403,6 +403,7 @@ Categories=Game;
     const {
       winePrefix,
       wineVersion,
+      wineCrossoverBottle,
       otherOptions,
       useGameMode,
       showFps,
@@ -414,7 +415,9 @@ Categories=Game;
       offlineMode,
       enableFSR,
       maxSharpness,
-      enableResizableBar
+      enableResizableBar,
+      enableEsync,
+      enableFsync
     } = await this.getSettings()
 
     const { discordRPC } = (await GlobalConfig.get().getSettings())
@@ -474,12 +477,17 @@ Categories=Game;
     const isProton =
       wineVersion.name.includes('Proton') ||
       wineVersion.name.includes('Steam')
-    prefix = isProton ? '' : prefix
+    const isCrossover =
+      wineVersion.name.includes('CrossOver')
+    prefix = (isProton || isCrossover) ? '' : prefix
 
     const options = {
       audio: audioFix ? `PULSE_LATENCY_MSEC=60` : '',
+      crossoverBottle: (isCrossover && wineCrossoverBottle != '') ? `CX_BOTTLE=${wineCrossoverBottle}` : '' ,
       fps: showFps ? `DXVK_HUD=fps` : '',
       fsr: enableFSR ? 'WINE_FULLSCREEN_FSR=1' : '',
+      esync: enableEsync ? 'WINEESYNC=1' : '',
+      fsync: enableFsync ? 'WINEFSYNC=1' : '',
       sharpness: enableFSR ? `WINE_FULLSCREEN_FSR_STRENGTH=${maxSharpness}` : '',
       resizableBar: enableResizableBar ? `VKD3D_CONFIG=upload_hvv` : '',
       other: otherOptions ? otherOptions : '',
@@ -508,8 +516,8 @@ Categories=Game;
       await execAsync(command, execOptions)
     }
 
-    // Install DXVK for non Proton Prefixes
-    if (!isProton && autoInstallDxvk) {
+    // Install DXVK for non Proton/CrossOver Prefixes
+    if (!isProton && !isCrossover && autoInstallDxvk) {
       await DXVK.install(winePrefix)
     }
 

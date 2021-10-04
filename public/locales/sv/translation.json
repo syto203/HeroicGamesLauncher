@@ -147,8 +147,10 @@
         "discordRPC": "Aktivera Discord Rich Presence",
         "egs-sync": "Synkronisera med installerade Epic spel",
         "enableFSRHack": "Aktivera FSR Hack (Wine versionen behöver stöd för det)",
+        "esync": "Enable Esync",
         "exit-to-tray": "Avsluta till systembrickan",
         "FsrSharpnessStrenght": "FSR Skärpanivå",
+        "fsync": "Enable Fsync",
         "gamemode": "Använd GameMode (Feral Game Mode måste vara installerat)",
         "language": "Välj app-språk",
         "mangohud": "Aktivera Mangohud (Mangohud måste vara installerat)",
@@ -176,6 +178,7 @@
         },
         "showfps": "Visa FPS (DX9, 10 och 11)",
         "start-in-tray": "Starta minimerad",
+        "winecrossoverbottle": "CrossOver Bottle",
         "wineprefix": "WinePrefix mapp",
         "wineversion": "Wine version"
     },

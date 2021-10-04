@@ -23,15 +23,21 @@ interface Props {
   enableResizableBar: boolean
   setAltWine: (altWine: WineInstallation[]) => void
   setCustomWinePaths: (value: string[]) => void
+  setWineCrossoverBottle: (value: string) => void
   setWinePrefix: (value: string) => void
   setFsrSharpness: (value: number) => void
   setWineVersion: (wine: WineInstallation) => void
   toggleAutoInstallDxvk: () => void
   toggleFSR: () => void
   toggleResizableBar: () => void
+  wineCrossoverBottle: string
   winePrefix: string
   wineVersion: WineInstallation
   enableFSR: boolean
+  enableEsync: boolean
+  toggleEsync: () => void
+  enableFsync: boolean
+  toggleFsync: () => void
 }
 
 export default function WineSettings({
@@ -47,11 +53,17 @@ export default function WineSettings({
   autoInstallDxvk,
   customWinePaths,
   setCustomWinePaths,
+  wineCrossoverBottle,
+  setWineCrossoverBottle,
   isDefault,
   setFsrSharpness,
   maxSharpness,
   enableResizableBar,
-  toggleResizableBar
+  toggleResizableBar,
+  enableEsync,
+  toggleEsync,
+  enableFsync,
+  toggleFsync
 }: Props) {
   const [selectedPath, setSelectedPath] = useState('')
   const { platform } = useContext(ContextProvider)
@@ -181,6 +193,18 @@ export default function WineSettings({
           ))}
         </select>
       </span>
+      {wineVersion.name.includes('CrossOver') && <span className="setting">
+        <span className="settingText">{t('setting.winecrossoverbottle', 'CrossOver Bottle')}</span>
+        <span>
+          <input
+            data-testid="crossoverBottle"
+            type="text"
+            value={wineCrossoverBottle}
+            className="settingSelect"
+            onChange={(event) => setWineCrossoverBottle(event.target.value)}
+          />
+        </span>
+      </span>}
       {isLinux && <span className="setting">
         <span className="toggleWrapper">
           {t('setting.autodxvk', 'Auto Install/Update DXVK on Prefix')}
@@ -223,6 +247,26 @@ export default function WineSettings({
           />
         </span>
       </span>
+      <span className="setting">
+        <span className="toggleWrapper">
+          {t('setting.esync', 'Enable Esync')}
+          <ToggleSwitch
+            value={enableEsync || false}
+            handleChange={toggleEsync}
+            dataTestId='esyncToggle'
+          />
+        </span>
+      </span>
+      <span className="setting">
+        <span className="toggleWrapper">
+          {t('setting.fsync', 'Enable Fsync')}
+          <ToggleSwitch
+            value={enableFsync || false}
+            handleChange={toggleFsync}
+            dataTestId='fsyncToggle'
+          />
+        </span>
+      </span>
       <InfoBox text="infobox.help">
         <span>{t('help.wine.part1')}</span>
         <ul>
@@ -234,6 +278,8 @@ export default function WineSettings({
             <li>~/.local/share/lutris/runners/wine</li>
             <li>~/.var/app/com.valvesoftware.Steam (Steam Flatpak)</li>
             <li>/usr/share/steam</li>
+            <li>Everywhere on the system (CrossOver Mac)</li>
+            <li>/opt/cxoffice (CrossOver Linux)</li>
           </i>
         </ul>
         <span>{t('help.wine.part2')}</span>

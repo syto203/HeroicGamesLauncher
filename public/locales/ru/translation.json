@@ -147,8 +147,10 @@
         "discordRPC": "Enable Discord Rich Presence",
         "egs-sync": "Синхронизировать с установленнными играми EGS",
         "enableFSRHack": "Enable FSR Hack (Wine version needs to support it)",
+        "esync": "Enable Esync",
         "exit-to-tray": "Сворачивать в системный трей",
         "FsrSharpnessStrenght": "FSR Sharpness Strength",
+        "fsync": "Enable Fsync",
         "gamemode": "Использовать GameMode (Нужен Feral Game Mode)",
         "language": "Выберите язык приложения",
         "mangohud": "Включить Mangohud (Нужен Mangohud)",
@@ -176,6 +178,7 @@
         },
         "showfps": "Показывать FPS (DX9, 10 и 11)",
         "start-in-tray": "Start Minimized",
+        "winecrossoverbottle": "CrossOver Bottle",
         "wineprefix": "Папка префикса Wine",
         "wineversion": "Версия Wine"
     },
